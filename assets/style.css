@@ -5,6 +5,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+
 body {
     background: lightgrey;
     display: flex;
@@ -23,7 +24,7 @@ body {
     box-shadow: 0 0 10px 2px;
 }
 
-h1 {
+.heading {
    font-size: 2rem;
    border-bottom: 2px solid black; 
    padding-bottom: 10px;
@@ -43,14 +44,15 @@ h1 {
     padding: 15px;
     margin: 10px;
     width:100%;
-    text-align: center;
+    /* text-align: center; */
     
 }
 
-.buttons, .submit {
+.buttons {
     border-radius: 5px;
-    background-color: rgb(234, 236, 241);
+    background-color: rgb(234, 236, 241);;
     padding: 10px;
+    text-align: left;
 }
 
 .buttons:hover {
@@ -62,28 +64,43 @@ h1 {
     padding: 10px;
     width: 15%;
     font-size: 1.5rem;
+    border-radius: 5px;
+    background-color: rgb(234, 236, 241);;
 }
-.submit:hover{
+
+.submit:hover, .start:hover {
     border-color: rgb(183, 230, 238);
 }
 
 .counter-clock {
     border: 2px solid rgb(94, 91, 91);
     width: 15%;
-    background-color: rgb(234, 236, 241);
+    background-color:rgb(234, 236, 241);
     border-radius: 5px;
     padding: 6px;
     font-size: 1rem;
+    text-align: center;
 }
 
-.start{
+.start {
     border: 2px solid rgb(94, 91, 91);
     width: 15%;
-    background-color: rgb(234, 236, 241);
+    background-color: --btnBackground;
     border-radius: 5px;
     padding: 6px;
-    font-size: 1rem;
+    font-size: 1.5rem;
     display: flex;
     justify-content: center;
     align-items: right; 
+    font-weight: bold;
+}
+
+.bottom-selection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ .hide { 
+    display: none;
 }
