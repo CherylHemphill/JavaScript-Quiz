@@ -7,13 +7,14 @@ let timer = document.getElementById('timer');
 let intro = document.getElementById('intro');
 let title = document.getElementById('title');
 let buttons = document.querySelectorAll('.buttons');
+let border = document.getElementById('container');
 
 let currentQuestion = 0;
 let availableQuestions = [];
 let score = 0;
 let correctAnswer = true;
-let timerCount = 70;
-// let questionIndex = 
+let timerCount = 60;
+
 
 availableQuestions = [
     {
@@ -49,7 +50,7 @@ availableQuestions = [
     {
         question: 'What indicates the absence of a value?',
         choice: ['objects', 'empty', 'blank', 'undefined'],
-        correctAnswer: ('undefined', true)
+        correctAnswer: ('undefined')
     }
 ]
 
@@ -66,57 +67,89 @@ function startQuiz() {
     timer.classList.remove('hide');
     next.classList.remove('hide');
 
-    showQuestion()
-    // startTimer()
+    showQuestion();
+    startTimer()
 }
 
 
 //Render the first question
 function showQuestion() {
-  
+ 
     // get the current ques and put it inside of the innerhtml of question area
     questionArea.innerHTML = availableQuestions[currentQuestion].question
     
     // grab all the choices
     let choices = availableQuestions[currentQuestion].choice;
+
     // grab all the buttons
-    
+  
     buttons[0].innerText = choices[0]
     buttons[1].innerText = choices[1]
     buttons[2].innerText = choices[2]
     buttons[3].innerText = choices[3]
 
+   for(var i = 0; i < availableQuestions[currentQuestion].choice.length; i++) {
+    buttons[i].innerText = choices[i]
+}  
+     
     // console.log(choices, buttons)
     // for each choice
     // -- put that choice on the screen
-}
+
 
 // Activate the Next Button 
- next.addEventListener('click', nextQuestion) 
+ next.addEventListener('click', NextQuestion) 
+}
+//  // show next question
+ function NextQuestion() {
+    currentQuestion++; //increment the next questions
+    
+    if(currentQuestion > availableQuestions.length - 1){
+        return EndQuiz
+    }
+showQuestion();
+   resetBorder() 
+ }
 
- // show next question
- function NextQuestion()
- questionArea.innerHTML = availableQuestions[currentQuestion].question[1];
- choices = availableQuestions[currentQuestion].choice[1];
-  
 
-// function setNextQuestion()
+//  set function for selected answers
 
-//  function selectAnswer () {
+buttons.addEventListener('click', selectAnswer)
+ function selectAnswer() {
+    // event.preventDefault();
+    if(correctAnswer){
+       border[i].setAttribute('style', 'border:rgb(138, 184, 138)');
+    } else {
+        border[i].setAttribute('style', 'wrong');
+        timerCount - 10;
+    }   
+    
+ }
 
-//  }
+ // Set a body reset function to clear correct or incorrect border color
+ function resetBorder(){
+    border[i].setAttribute('style', 'border:black')
+ }
 
-// Timer clock
-// startTimer =
-//     setInterval(function () {
-//         timerCount--;
 
-//         if (timerCount <= 0) {
-//             clearInterval(startTimer);
-//             if (questionIndex < questions.length - 1) {
-//                 quizOver();
-//             }
-//         }
-//     }, 1000);
+// Timer clock set up
+function startTimer(){
+    timer = setInterval(function() {
+        timerCount--;
 
+        if (timerCount <= 0) {
+            clearInterval(timer);
+            endQuiz();
+         } else  {
+               (currentQuestion < availableQuestions.length - 1)
+            endQuiz();
+            timer.textContent = Math.floor(timerCount % 60);
+            }
+
+    }, 1000);
+}
  // End Quiz and set local storage with scores
+
+//  function endQuiz(){
+
+//}
