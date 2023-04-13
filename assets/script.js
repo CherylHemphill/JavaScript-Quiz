@@ -20,32 +20,32 @@ availableQuestions = [
     {
         question: 'Multiple strings can be concatenated together using which operator?',
         choice: ['-', 'x', '+', '*'],
-        correctAnswer: ('+', true)
+        correctAnswer: ('+')
     },
     {
         question: 'Which comparison operator means strict not equal?',
         choice: ['!==', '===', '<=', '=='],
-        correctAnswer: ('!==', true)
+        correctAnswer: ('!==')
     },
     {
         question: 'How would you declare an array?',
         choice: ['function myArray', 'const color = blue', 'console.log(array)', 'let myArray = [100, 200]'],
-        correctAnswer: ('let myArray = [100, 200]', true)
+        correctAnswer: ('let myArray = [100, 200]')
     },
     {
         question: 'AddEventListener() method sets up a/an ...',
         choice: ['event', 'object', 'function', 'audio file'],
-        correctAnswer: ('event', true)
+        correctAnswer: ('event')
     },
     {
         question: 'A Boolean value returns objects as:',
         choice: ['numbers', 'operators', 'true or false', 'local storage'],
-        correctAnswer: ('true or false', true)
+        correctAnswer: ('true or false')
     },
     {
         question: 'Which option is one available loop statement?',
         choice: ['do...while', 'fruit loop', 'number lengths', 'of ... end'],
-        correctAnswer: ('do...while', true)
+        correctAnswer: ('do...while')
     },
     {
         question: 'What indicates the absence of a value?',
@@ -98,7 +98,8 @@ function showQuestion() {
 
 
 // Activate the Next Button 
- next.addEventListener('click', NextQuestion) 
+ next.addEventListener('click', NextQuestion); 
+ 
 }
 //  // show next question
  function NextQuestion() {
@@ -114,13 +115,14 @@ showQuestion();
 
 //  set function for selected answers
 
-buttons.addEventListener('click', selectAnswer)
+buttons.addEventListener('click', selectAnswer);
+
  function selectAnswer() {
-    // event.preventDefault();
-    if(correctAnswer){
-       border[i].setAttribute('style', 'border:rgb(138, 184, 138)');
+    
+    if(availableQuestions[currentQuestion].correctAnswer === availableQuestions[currentQuestion].choice){
+       border.setAttribute('style', 'border:rgb(138, 184, 138)');
     } else {
-        border[i].setAttribute('style', 'wrong');
+        border.setAttribute('style', 'wrong');
         timerCount - 10;
     }   
     
@@ -128,7 +130,7 @@ buttons.addEventListener('click', selectAnswer)
 
  // Set a body reset function to clear correct or incorrect border color
  function resetBorder(){
-    border[i].setAttribute('style', 'border:black')
+    border.setAttribute('style', 'border:black')
  }
 
 
@@ -143,13 +145,17 @@ function startTimer(){
          } else  {
                (currentQuestion < availableQuestions.length - 1)
             endQuiz();
-            timer.textContent = Math.floor(timerCount % 60);
+            timer.innerText = Math.floor(timerCount % 60);
             }
 
     }, 1000);
 }
  // End Quiz and set local storage with scores
 
-//  function endQuiz(){
+ function endQuiz(){
+    event.preventDefault();
+    return timerCount;
 
-//}
+    let scores = localStorage.getItem(timerCount);
+    scores.appendChild(scores);
+}
