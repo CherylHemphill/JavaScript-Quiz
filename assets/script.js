@@ -8,11 +8,18 @@ let intro = document.getElementById('intro');
 let title = document.getElementById('title');
 let buttons = document.querySelectorAll('.buttons');
 let border = document.getElementById('container');
+let endScore = document.getElementById('end-score');
+let highScore = document.getElementById('high-score');
+let btn0 = document.getElementById('btn0');
+let btn1 = document.getElementById('btn');
+let btn2 = document.getElementById('btn2');
+let btn3 = document.getElementById('btn3');
+let timeRemaining = document.getElementById('timeRemaining');
 
 let currentQuestion = 0;
 let availableQuestions = [];
 let score = 0;
-let correctAnswer = true;
+let answeredCorrectly = 0;
 let timerCount = 60;
 
 
@@ -59,23 +66,23 @@ start.addEventListener('click', startQuiz)
 
 //Begin the quiz with the start button
 function startQuiz() {
-    //  event.preventDefault();
+
     start.classList.add('hide');
     intro.classList.add('hide');
     title.classList.add('hide');
     questionBox.classList.remove('hide');
     timer.classList.remove('hide');
-    next.classList.remove('hide');
+    // next.classList.remove('hide');
 
-    showQuestion();
-    startTimer()
+    startTimer();
+    NextQuestion();
 }
 
 
 //Render the first question
-function showQuestion() {
+function NextQuestion() {
  
-    // get the current ques and put it inside of the innerhtml of question area
+    // get the current question and put it inside of the innerhtml of question area
     questionArea.innerHTML = availableQuestions[currentQuestion].question
     
     // grab all the choices
@@ -91,71 +98,77 @@ function showQuestion() {
    for(var i = 0; i < availableQuestions[currentQuestion].choice.length; i++) {
     buttons[i].innerText = choices[i]
 }  
-     
     // console.log(choices, buttons)
     // for each choice
     // -- put that choice on the screen
-
-
-// Activate the Next Button 
- next.addEventListener('click', NextQuestion); 
- 
 }
-//  // show next question
- function NextQuestion() {
-    currentQuestion++; //increment the next questions
+
+ // show next question
+ NextQuestion() 
     
-    if(currentQuestion > availableQuestions.length - 1){
-        return EndQuiz
+    if (currentQuestion > availableQuestions.length){  //if no more questions available, end quiz
+         EndQuiz();
+       } 
+       else {
+        this.currentQuestion++;
+       }
+    
+function checkAnswer(){     //validate selected answer choice
+      if (availableQuestions[currentQuestion].correctAnswer === availableQuestions[currentQuestion].choices[correctAnswer]) {
+        border.setAttribute('style', 'correct');
+        answeredCorrectly++; //add 1 point to score
+        NextQuestion(); // if answered correctly, border changes to green
+       }
+    else {
+        border.setAttribute('style', 'wrong');  //incorrect answer, border changes to red
+        timerCount - 10;
+        NextQuestion();
     }
-showQuestion();
+        btn0 = availableQuestions[currentQuestion].choice[0];
+        btn1 = availableQuestions[currentQuestion].choice[1];
+        btn2 = availableQuestions[currentQuestion].choice[2];
+        btn3 = availableQuestions[currentQuestion].choice[3];
+
+//  event listener for selected answers
+btn0.addEventListener('click', checkAnswer);
+btn1.addEventListener('click', checkAnswer);
+btn2.addEventListener('click', checkAnswer);
+btn3.addEventListener('click', checkAnswer);
+        
+// currentQuestion++; //increment the next questions
+ 
+       
+function resetBorder(){ // Set a body reset function to clear correct or incorrect border color
+    border.setAttribute('style', 'border:black')
+ }
+  NextQuestion();
    resetBorder() 
  }
 
 
-//  set function for selected answers
-
-buttons.addEventListener('click', selectAnswer);
-
- function selectAnswer() {
-    
-    if(availableQuestions[currentQuestion].correctAnswer === availableQuestions[currentQuestion].choice){
-       border.setAttribute('style', 'border:rgb(138, 184, 138)');
-    } else {
-        border.setAttribute('style', 'wrong');
-        timerCount - 10;
-    }   
-    
- }
-
- // Set a body reset function to clear correct or incorrect border color
- function resetBorder(){
-    border.setAttribute('style', 'border:black')
- }
-
-
-// Timer clock set up
-function startTimer(){
-    timer = setInterval(function() {
+// Timer clock set up function startTimer(){  
+  timer = 
+    setInterval(function() {
         timerCount--;
-
+        timeRemaining.innerHTML = timerCount;
         if (timerCount <= 0) {
             clearInterval(timer);
             endQuiz();
          } else  {
                (currentQuestion < availableQuestions.length - 1)
             endQuiz();
-            timer.innerText = Math.floor(timerCount % 60);
             }
-
     }, 1000);
-}
+
  // End Quiz and set local storage with scores
 
- function endQuiz(){
-    event.preventDefault();
-    return timerCount;
+ function endQuiz(event){
+   event.preventDefault();
+    endScore.innerHTML = answeredCorrectly;
 
-    let scores = localStorage.getItem(timerCount);
-    scores.appendChild(scores);
+    highScore = localStorage.getItem('high scores');
+    
+
+    //let scores = localStorage.getItem(timerCount);
+    // scores.appendChild(scores);
 }

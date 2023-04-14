@@ -8,26 +8,31 @@
     <title>Timed JavaScript Quiz</title>
 </head>
 <body>
-    <main class=" correct wrong container">
+    <main class=" correct wrong container"> <!--Quiz Title-->
      <section id="title" class="heading">Test Your JavaScript Knowledge</section>   
         <div id="question-box" class="hide">
-    
+                 <!--Answer choice selection buttons-->
     <div id="question" class="question">Questions here!</div>
     <div id="answers" class="answer-selection">
-        <button class="buttons">Answer 1</button>
-        <button class="buttons">Answer 2</button>
-        <button class="buttons">Answer 3</button>
-        <button class="buttons">Answer 4</button>
+        <button id="btn0" class="buttons">Answer 1</button>
+        <button id="btn1" class="buttons">Answer 2</button>
+        <button id="btn2" class="buttons">Answer 3</button>
+        <button id="btn3" class="buttons">Answer 4</button>
     </div>
    </div>
-    <div id = "intro" class="intro">Test Your JavaScript knowledge while racing against the clock. <br> Once you click the Start button you will be presented with a series of questions.<br>If you answer incorrectly, 10 seconds will be subtracted from your final score!</div>
+                <!--Quiz Intro & Start Button-->
+    <div id = "intro" class="intro">Test Your JavaScript knowledge while racing against the clock. <br> Once you click the Start button you will be presented with a series of questions.<br>If you answer incorrectly, 10 seconds will be subtracted from your time remaining!</div>
     <div class="bottom-selection">
-    <button id="next" class="submit hide">Next </button>
+    <div id="next" class="submit hide"></div>
     
     <button id="startButton" class="start">Start</button>
       </div>  
-    <div id="timer" class="counter-clock hide">Timer</div>
-   
+                <!--Timer Clock Counter-->
+    <div id="timer" class="counter-clock hide"><span id="timeRemaining"></span></div>
+                <!--End Quiz Scores & User Input field to store scores-->
+    <div id="end-score" class="complete"></div>
+    <p id="high-score" class="final-score"></p>
+
     </main> 
    <script src="assets/script.js"></script>
 </body>
