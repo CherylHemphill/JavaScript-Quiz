@@ -6,6 +6,7 @@ This is a timed quiz on JavaScript basics. You will have a limited time to selec
 ## Installation
 Open your web browser and follow the link to begin your quiz.
 
+![alt img](/assets/images/Screenshot%202023-04-13%20232927.pngassets.)
 
 ## Usage
 This is a fun and quick way to test your skills on JavaScript
