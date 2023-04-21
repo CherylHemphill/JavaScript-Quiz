@@ -20,7 +20,7 @@ let currentQuestion = 0;
 let availableQuestions = [];
 let score = 0;
 let answeredCorrectly = 0;
-let timerCount = 60;
+let timerCount = 75;
 
 
 availableQuestions = [
@@ -105,13 +105,13 @@ function NextQuestion() {
 
  // show next question
  NextQuestion() 
-    
     if (currentQuestion > availableQuestions.length){  //if no more questions available, end quiz
-         EndQuiz();
+         endQuiz();
        } 
        else {
         this.currentQuestion++;
-       }
+       };
+    
     
 function checkAnswer(){     //validate selected answer choice
       if (availableQuestions[currentQuestion].correctAnswer === availableQuestions[currentQuestion].choices[correctAnswer]) {
@@ -162,13 +162,16 @@ function resetBorder(){ // Set a body reset function to clear correct or incorre
 
  // End Quiz and set local storage with scores
 
- function endQuiz(event){
-   event.preventDefault();
+ function endQuiz(){
+//    event.preventDefault();
     endScore.innerHTML = answeredCorrectly;
-
-    highScore = localStorage.getItem('high scores');
+let finalScore = {
+    endScore: 'answeredCorretly',
     
-
-    //let scores = localStorage.getItem(timerCount);
-    // scores.appendChild(scores);
+}
+    highScore = localStorage.setItem('high scores');
+    
+    
+    let scores = localStorage.getItem(timerCount);
+    scores.appendChild(scores);
 }
